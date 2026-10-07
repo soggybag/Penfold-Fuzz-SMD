@@ -110,3 +110,27 @@ IN ─► input buffer ─┬─► SEND ─► (external loop) ─► RETURN �
 - **SENS trimmer RV1:** 3296W → **Bourns 3362P 500k** (single-turn, top adjust), same footprint as UF1 v1.2. C4 moved down 0.4 mm to make room; board re-routed with `_tools/autoroute.py`.
 - Pots and LED now excluded from the BOM/CPL in both the schematic and the board.
 - **Bench watch-outs:** pick-attack thumps from OTA offset (no trim), and envelope ripple on low notes at fast DECAY.
+
+## Dynamic fuzz vs clean-up distortion (2026-10-07)
+
+Two related ideas came out of the Flatline expander discussion. Both use the same block: a clean input buffer and an envelope follower that listens to the **clean** guitar, driving a gain element (OTA or vactrol). Where the gain element sits relative to the clipper decides the effect:
+
+| | **Dynamic fuzz** (this pedal) | **Clean-up distortion** (separate design) |
+|---|---|---|
+| Gain element | **after** the fuzz | **before** the clipper |
+| Envelope controls | output **volume** | **drive** |
+| Hard pick / soft or decay | loud fuzz / quiet fuzz, same character | dirty / clean |
+
+**Decision:** keep them as separate pedals that share the envelope block. Penfold already *is* the dynamic fuzz (envelope → LM13700 VCA after the Rat stage).
+
+**Test Penfold first** (boards ordered October 2026):
+- Listen for **envelope ripple**: grain or fizz on low notes, worse at short DECAY. It comes from the BAT54S half-wave detector and the C16 hold cap.
+- **If the ripple is audible, try an LED/LDR (vactrol) gain element in place of the OTA.** The LDR's slow response (~2.5 ms on, ~35 ms off) filters ripple on its own, and it's the Flatline's proven path. A quick test: drive a vactrol LED from the envelope (with a series resistor), and put the LDR as a series/shunt attenuator after the fuzz.
+- If the OTA sounds clean, keep it: it's faster, repeatable and needs no vactrol.
+
+**Later:**
+- A Muff-style core in place of the Rat stage.
+- The optical "Dynamic Loop" (SEND/RETURN, so any fuzz gets the treatment): see `Flatline SMD/Flatline Roadmap.md`.
+- Both directions in one pedal: an LM13700's two OTAs, one before the clipper and one after, with a single DYNAMICS knob sweeping between them. Only if both separate versions prove themselves.
+
+The clean-up distortion breadboard (LED/LDR, Flatline/Punch Line style) is in `~/Documents/KiCad/projects/Clean-Up Drive/`.
