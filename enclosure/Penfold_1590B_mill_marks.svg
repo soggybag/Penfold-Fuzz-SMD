@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="60.0mm" height="112.0mm" viewBox="0 0 60.0 112.0">
+<circle id="VOLUME" cx="15.710" cy="19.780" r="3.750" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="VOLUME_centre" cx="15.710" cy="19.780" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="DRIVE" cx="44.290" cy="19.780" r="3.750" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="DRIVE_centre" cx="44.290" cy="19.780" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="LED" cx="30.000" cy="35.660" r="1.600" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="LED_centre" cx="30.000" cy="35.660" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="DECAY" cx="15.710" cy="45.180" r="3.750" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="DECAY_centre" cx="15.710" cy="45.180" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="FILTER" cx="44.290" cy="45.180" r="3.750" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="FILTER_centre" cx="44.290" cy="45.180" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="FOOTSWITCH" cx="30.000" cy="93.500" r="6.100" fill="none" stroke="#000" stroke-width="0.2"/>
+<circle id="FOOTSWITCH_centre" cx="30.000" cy="93.500" r="0.5" fill="none" stroke="#000" stroke-width="0.2"/>
+</svg>

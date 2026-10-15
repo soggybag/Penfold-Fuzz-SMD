@@ -1,0 +1,7 @@
+Side,Label,X (mm),Y (mm),"Diameter (mm, raw aluminium)"
+A,"VOLUME (RV5, 16 mm A100k)",-14.29,36.22,7.5
+A,"DRIVE (RV2, 16 mm A100k)",14.29,36.22,7.5
+A,"LED (3 mm)",0.0,20.34,3.2
+A,"DECAY (RV4, 16 mm B250k)",-14.29,10.82,7.5
+A,"FILTER (RV3, 16 mm B100k)",14.29,10.82,7.5
+A,"Footswitch 3PDT",0.0,-37.5,12.2
