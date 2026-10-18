@@ -106,3 +106,26 @@ A Rat-style fuzz whose output goes through a VCA (LM13700). The VCA's gain follo
 | Date | |
 | SENS trimmer setting | |
 | Notes | |
+
+## Punch (transient shaper) air-wire test (2026-10-18)
+
+**Result:** it works. Notes jump out on the attack ("the idea is there"), but it's a little **rough**: extra distortion, probably from the VCA.
+
+**Suspects, most likely first:**
+1. **Envelope ripple through the punch path:**
+   - The doubler's audio-rate ripple on C16 passes C_p → diode → R_p almost untouched into Iabc.
+   - The gain wobbles at the note frequency (fizzy).
+   - R15 (220k) only passes a little of it, which is why v1.0 without the punch was smooth.
+2. **The spike overdrives the VCA output** (~10× the sustain Iabc), flat-topping the attack.
+3. **Iabc step thump** (control feedthrough).
+
+**Tests:**
+- **DRIVE down + single notes:** still rough? Then it's the VCA, not the Rat.
+- **Scope U2 pin 8** during a pick: flat tops = (2) → R_p 47k → 100k.
+- **Scope the diode cathode / R_p node:** audio-rate ripple = (1) → **100n–470n from that node to GND** (smooths the spike, softens the attack slightly; try 100n first).
+
+**v2:** ENV buffer (U3B) + a small low-pass in the punch path; R_p as the PUNCH pot with a ~47k minimum.
+
+**FILTER reminder (3.3):**
+- Bench fix: lift C13's /FILT end and wire it to C12 pin 1 (= RV3 pins 2 / 3).
+- v1.1: move that connection in the schematic.

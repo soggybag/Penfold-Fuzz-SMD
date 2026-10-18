@@ -173,3 +173,22 @@ This is what makes clean notes stand out. It's what a "transient designer" does 
 - the punch network;
 - two or three new pots (PUNCH, ATTACK DECAY, SUSTAIN), probably replacing SENS's role, with SENS staying as a trimmer.
 - This fits the "Penfold Dynamics" v2 direction above.
+
+### Transient shaper: simulation (2026-10-17, `sim/punch.py`)
+
+Iabc (µA) for a picked note (ENV rises in ~2 ms, decays with τ 0.8 s, 6 V peak), C_p 1µ, R_d 100k:
+
+| Time | 2 ms | 10 ms | 50 ms | 0.1 s | 0.2 s | 0.4 s | 0.8 s |
+|---|---|---|---|---|---|---|---|
+| v1.0 (R15 220k) | 20 | 22 | 20 | 19 | 16 | 11 | 5 |
+| R15 470k only | 9 | 10 | 9 | 9 | 7 | 5 | 2 |
+| R15 470k + punch R_p 47k | **90** | **75** | 18 | 9 | 7 | 5 | 2 |
+| R15 470k + punch R_p 22k | 175 | 121 | 10 | 9 | 7 | 5 | 2 |
+
+- The spike is ~**+20 dB** over sustain and settles in **~50–100 ms**; then the note follows its natural decay (the ADSR-like shape).
+- **R_d** sets the spike length: 47k ≈ 40 ms, 100k ≈ 80 ms, 330k ≈ 150 ms.
+- **Needs:**
+  - ENV must follow the note (v1.0's clipping envelope amp → lower SENS);
+  - U3B as the ENV buffer;
+  - R_p ≥ 47k so the spike doesn't overdrive the VCA.
+- **v2 controls:** PUNCH, SUSTAIN, DECAY (release), spike length (pot or trim), SENS (trim).
